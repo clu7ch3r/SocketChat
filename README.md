@@ -1,3 +1,6 @@
+# Original Repo
+https://github.com/Kolahzary/SocketChat
+
 # SocketChat
 A simple Client-Server chat application written in C# &amp; WPF.
 
