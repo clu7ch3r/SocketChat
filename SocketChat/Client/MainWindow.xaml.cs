@@ -32,7 +32,8 @@ namespace Client
         {
             try
             {
-                cc.SwitchClientState();
+                var ip_address = ipAddress.Text;
+                cc.SwitchClientState(ip_address);
             }
             catch (Exception ex)
             {
