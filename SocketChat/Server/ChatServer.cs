@@ -148,10 +148,13 @@ namespace Server
 
             this.IsServerActive = false;
         }
-        public void SwitchServerState()
+        public void SwitchServerState(string ip)
         {
-            if (!this.IsServerActive) // server should be activated
+            if (!this.IsServerActive)
+            {
+                this.IpAddress = ip;
                 this.StartServer();
+            }
             else // server is currently active and should be stopped
                 this.StopServer();
         }

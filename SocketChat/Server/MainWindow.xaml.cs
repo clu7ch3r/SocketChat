@@ -44,7 +44,8 @@ namespace Server
 
         private void bSwitchServerState_Click(object sender, RoutedEventArgs e)
         {
-            cs.SwitchServerState();
+            var ip = ipAddress.Text;
+            cs.SwitchServerState(ip);
         }
 
         private void bSend_Click(object sender, RoutedEventArgs e)

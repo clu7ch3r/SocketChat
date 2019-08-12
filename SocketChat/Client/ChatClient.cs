@@ -110,10 +110,13 @@ namespace Client
 
             return true;
         }
-        public void SwitchClientState()
+        public void SwitchClientState(string ip)
         {
             if (!this.IsClientConnected)
+            {
+                this.IpAddress = ip;
                 this.Connect();
+            }
             else
                 this.Disconnect();
         }
