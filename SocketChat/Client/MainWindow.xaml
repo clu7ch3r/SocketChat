@@ -51,7 +51,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Socket Address:"/>
-<<<<<<< HEAD
+<<<<<<<HEAD
             <TextBox Grid.Column="1" Grid.Row="0" Text="" IsEnabled="{Binding Path=IsClientDisconnected}" Name="ipAddress"/>
 =======
             <TextBox Name="ipAddress" Grid.Column="1" Grid.Row="0" Text="" IsEnabled="{Binding Path=IsClientDisconnected}"/>
