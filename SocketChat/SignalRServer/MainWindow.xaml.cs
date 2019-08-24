@@ -21,7 +21,7 @@ namespace SignalRServer
     public partial class MainWindow : Window
     {
         public IDisposable SignalR { get; set; }
-        const string ServerURI = "http://localhost:8080";
+        const string ServerURI = "http://" + "192.168.0.8:8000";
         public MainWindow()
         {
             InitializeComponent();

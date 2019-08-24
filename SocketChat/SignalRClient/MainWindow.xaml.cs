@@ -20,7 +20,7 @@ namespace SignalRClient
         /// </summary> 
         public String UserName { get; set; }
         public IHubProxy HubProxy { get; set; }
-        const string ServerURI = "http://localhost:8080/signalr";
+        const string ServerURI = "http://" + "192.168.0.8:8000" + "/signalr";
         public HubConnection Connection { get; set; }
 
         public MainWindow()
