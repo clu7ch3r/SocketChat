@@ -189,9 +189,9 @@ namespace Server
             }
             else if (toUsername.Equals("@all"))
             {
-                foreach(Client c in lstClients)
+                foreach (Client c in lstClients)
                 {
-                    if(c.Username != from.Username)
+                    if (c.Username != from.Username)
                     {
                         c.SendMessage(message);
                     }
@@ -212,19 +212,27 @@ namespace Server
             {
                 if (_socket == null) return;
                 Client client = new Client();
-                client.ID = this._clientIdCounter;
-                client.Username = "NewUser"; // نام کاربری موقت
+                client.ID = _clientIdCounter;
+                client.Username = "NewUser";
                 try
                 {
                     client.Socket = _socket.Accept();
                     client.Thread = new Thread(() => ProcessMessages(client));
 
-                    this._dispatcher.Invoke(new Action(() =>
-                    {
-                        lstClients.Add(client);
-                    }), null);
+                    _dispatcher.Invoke(new Action(() =>
+                {
+                    lstClients.Add(client);
+                }), null);
 
                     client.Thread.Start();
+
+                    _dispatcher.Invoke(new Action(() =>
+                    {
+                        foreach (var c in lstClients)
+                        {
+                            SendMessage(c.Username, $"{lstClients.LastOrDefault().Username} has connected");
+                        }
+                    }), null);
                 }
                 catch (Exception)
                 {
@@ -244,8 +252,11 @@ namespace Server
                         {
                             lstClients.Remove(c);
                             c.Dispose();
+                            foreach (var client in lstClients)
+                            {
+                                SendMessage(client.Username, $"{c.Username} has disconnected");
+                            }
                         }), null);
-
                         return;
                     }
 
@@ -272,7 +283,6 @@ namespace Server
                                 SendMessage(c, targetUsername, message);
                             }), null);
                         }
-
                     }
                 }
                 catch (Exception)
