@@ -168,22 +168,35 @@ namespace Server
             string message = from.Username + ": " + messageContent;
 
             bool isSent = false;
-
-            // if target is server
-            if (toUsername == this.Username)
+            if (!toUsername.Equals("@all"))
             {
-                this.lstChat.Add(message);
-                isSent = true;
-            }
-
-            // if target username is registered
-            foreach (Client c in lstClients)
-            {
-                if (c.Username == toUsername)
+                // if target is server
+                if (toUsername == this.Username)
                 {
-                    c.SendMessage(message);
+                    this.lstChat.Add(message);
                     isSent = true;
                 }
+
+                // if target username is registered
+                foreach (Client c in lstClients)
+                {
+                    if (c.Username == toUsername)
+                    {
+                        c.SendMessage(message);
+                        isSent = true;
+                    }
+                }
+            }
+            else if (toUsername.Equals("@all"))
+            {
+                foreach(Client c in lstClients)
+                {
+                    if(c.Username != from.Username)
+                    {
+                        c.SendMessage(message);
+                    }
+                }
+                isSent = true;
             }
 
             // if target username isn't registered
